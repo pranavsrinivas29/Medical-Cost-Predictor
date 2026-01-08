@@ -1,0 +1,9 @@
+install requirements
+
+git init
+dvc init
+
+eda
+feature engineering
+model experimentation and training
+evaluation
