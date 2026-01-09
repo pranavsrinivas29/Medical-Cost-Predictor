@@ -6,7 +6,7 @@ stages:
       - data/raw
     outs:
       - data/processed
-      
+
   feature_engineering:
     cmd: python training/src/feature_engineering.py --log-target
     deps:
@@ -14,3 +14,12 @@ stages:
       - data/processed
     outs:
       - data/feature_engineering
+
+  train:
+    cmd: python training/src/train.py
+    deps:
+      - training/src/train.py
+      - data/feature_engineering
+    outs:
+      - models/xgboost/best_model.joblib
+      - models/xgboost/best_params.json
