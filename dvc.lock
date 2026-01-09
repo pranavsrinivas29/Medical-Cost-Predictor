@@ -18,3 +18,21 @@ stages:
       md5: 0601f1963fd62f4fc7e4a490f3b94ed3.dir
       size: 54394
       nfiles: 4
+  feature_engineering:
+    cmd: python training/src/feature_engineering.py --log-target
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: 0601f1963fd62f4fc7e4a490f3b94ed3.dir
+      size: 54394
+      nfiles: 4
+    - path: training/src/feature_engineering.py
+      hash: md5
+      md5: 20f033a291ff8c04446ff164fa05d309
+      size: 8828
+    outs:
+    - path: data/feature_engineering
+      hash: md5
+      md5: 7d2d4b653c4bf28ddd277586154ee76a.dir
+      size: 29450
+      nfiles: 4

@@ -6,3 +6,11 @@ stages:
       - data/raw
     outs:
       - data/processed
+      
+  feature_engineering:
+    cmd: python training/src/feature_engineering.py --log-target
+    deps:
+      - training/src/feature_engineering.py
+      - data/processed
+    outs:
+      - data/feature_engineering
