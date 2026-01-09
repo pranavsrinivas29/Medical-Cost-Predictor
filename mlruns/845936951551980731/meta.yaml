@@ -1,0 +1,6 @@
+artifact_location: file:///Users/pranavsrinivasvenkatesh/Projects/RAG%20Course/MLOps%20end-to-end%20Project/mlops-e2e/mlruns/845936951551980731
+creation_time: 1767960562901
+experiment_id: '845936951551980731'
+last_update_time: 1767960562901
+lifecycle_stage: active
+name: insurance-xgboost

@@ -1,0 +1,19 @@
+{
+  "processed_dir": "data/processed",
+  "numeric_features": [
+    "age",
+    "bmi",
+    "children"
+  ],
+  "categorical_features": [
+    "sex",
+    "smoker",
+    "region"
+  ],
+  "scale_numeric": true,
+  "onehot_drop": "first",
+  "apply_log_target": true,
+  "n_train": 1070,
+  "n_test": 268,
+  "n_features_after_transform": 8
+}

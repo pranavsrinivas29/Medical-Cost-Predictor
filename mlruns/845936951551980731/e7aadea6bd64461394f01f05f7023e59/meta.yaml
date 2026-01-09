@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/pranavsrinivasvenkatesh/Projects/RAG%20Course/MLOps%20end-to-end%20Project/mlops-e2e/mlruns/845936951551980731/e7aadea6bd64461394f01f05f7023e59/artifacts
+end_time: 1767961064241
+entry_point_name: ''
+experiment_id: '845936951551980731'
+lifecycle_stage: active
+run_id: e7aadea6bd64461394f01f05f7023e59
+run_name: xgboost_trained_with_bayes_hpo
+run_uuid: e7aadea6bd64461394f01f05f7023e59
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1767961061045
+status: 3
+tags: []
+user_id: pranavsrinivasvenkatesh
