@@ -1,0 +1,25 @@
+services:
+  fastapi:
+    build:
+      context: ..
+      dockerfile: docker/serve.Dockerfile
+    container_name: insurance-fastapi
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../data/feature_engineering:/app/data/feature_engineering
+      - ../models/xgboost:/app/models/xgboost
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  streamlit:
+    build:
+      context: ..
+      dockerfile: docker/ui.Dockerfile
+    container_name: insurance-ui
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://fastapi:8000
+    depends_on:
+      - fastapi
