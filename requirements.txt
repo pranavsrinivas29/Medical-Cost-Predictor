@@ -7,3 +7,7 @@ joblib==1.5.2
 mlflow==2.21.2
 scikit-optimize==0.10.2
 xgboost==3.0.2
+
+fastapi==0.115.12
+streamlit==1.37.1
+requests==2.32.3
