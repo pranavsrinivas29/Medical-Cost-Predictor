@@ -36,3 +36,24 @@ stages:
       md5: 7d2d4b653c4bf28ddd277586154ee76a.dir
       size: 29450
       nfiles: 4
+  train:
+    cmd: python training/src/train.py
+    deps:
+    - path: data/feature_engineering
+      hash: md5
+      md5: 7d2d4b653c4bf28ddd277586154ee76a.dir
+      size: 29450
+      nfiles: 4
+    - path: training/src/train.py
+      hash: md5
+      md5: 0db3380324fd7ed3d66e354d7ffae23b
+      size: 9973
+    outs:
+    - path: models/xgboost/best_model.joblib
+      hash: md5
+      md5: e670e4a6fd979b2af58c2b7965fcfb2e
+      size: 924181
+    - path: models/xgboost/best_params.json
+      hash: md5
+      md5: c5d9299751d35f35543d1816d7a684fc
+      size: 215
