@@ -7,3 +7,5 @@ eda
 feature engineering
 model experimentation and training
 evaluation
+
+inference: use all the preprocessors and saved model
