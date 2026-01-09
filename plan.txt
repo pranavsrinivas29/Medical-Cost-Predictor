@@ -6,6 +6,9 @@ dvc init
 eda
 feature engineering
 model experimentation and training
+    -mlflow integration
+    -hyperparamter tuning
+    -model logging into mlflow
 evaluation
 
 inference: use all the preprocessors and saved model
