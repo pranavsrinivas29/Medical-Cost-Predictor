@@ -1,0 +1,8 @@
+stages:
+  preprocess:
+    cmd: python training/src/preprocess.py
+    deps:
+      - training/src/preprocess.py
+      - data/raw
+    outs:
+      - data/processed
