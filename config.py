@@ -4,9 +4,18 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent
 
 # Directories
-DATA_DIR = PROJECT_ROOT / "data"
+# Detect if running in Kubernetes (PV is mounted at /data)
+K8S_DATA_DIR = Path("/data")
+
+if K8S_DATA_DIR.exists():
+    # Running inside Kubernetes
+    DATA_DIR = K8S_DATA_DIR
+else:
+    # Running locally
+    DATA_DIR = PROJECT_ROOT / "data"
+
 FE_DIR = DATA_DIR / "feature_engineering"
-MODELS_DIR = PROJECT_ROOT / "models"
+MODELS_DIR = DATA_DIR / "models"
 OUTPUTS_DIR = PROJECT_ROOT / "outputs"
 
 # Feature engineering artifacts
