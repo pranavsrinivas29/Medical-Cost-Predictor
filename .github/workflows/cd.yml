@@ -1,0 +1,33 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Deploy to Kubernetes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: "v1.30.5"
+
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > ~/.kube/config
+
+      - name: Restart FastAPI Deployment
+        run: |
+          kubectl rollout restart deployment fastapi-deployment -n mlops-system
+
+      - name: Restart Streamlit Deployment
+        run: |
+          kubectl rollout restart deployment streamlit-deployment -n mlops-system
