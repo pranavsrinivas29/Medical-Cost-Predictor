@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-deployment
+  namespace: mlops-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+        - name: fastapi
+          image: pranavsrinivas2999/insurance-fastapi:latest
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: mlops-volume
+              mountPath: /data
+
+      volumes:
+        - name: mlops-volume
+          persistentVolumeClaim:
+            claimName: mlops-pvc

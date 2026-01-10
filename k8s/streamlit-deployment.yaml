@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streamlit-deployment
+  namespace: mlops-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: streamlit
+  template:
+    metadata:
+      labels:
+        app: streamlit
+    spec:
+      containers:
+        - name: streamlit
+          image: pranavsrinivas2999/insurance-ui:latest
+          ports:
+            - containerPort: 8501
+          env:
+            - name: API_URL
+              value: "http://fastapi-service.mlops-system.svc.cluster.local:8000"

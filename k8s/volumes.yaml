@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mlops-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: hostpath           # REQUIRED for Docker Desktop
+  hostPath:
+    path: "/Users/pranavsrinivasvenkatesh/Projects/RAG-Course/MLOps-end-to-end-Project/mlops-e2e/data"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mlops-pvc
+  namespace: mlops-system
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: hostpath           # MUST MATCH PV
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: mlops-pv                  # FORCE BIND
