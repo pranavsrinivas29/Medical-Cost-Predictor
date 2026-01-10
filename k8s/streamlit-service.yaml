@@ -4,7 +4,7 @@ metadata:
   name: streamlit-service
   namespace: mlops-system
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: streamlit
   ports:

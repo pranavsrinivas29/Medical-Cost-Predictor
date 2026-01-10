@@ -4,7 +4,7 @@ metadata:
   name: fastapi-service
   namespace: mlops-system
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: fastapi
   ports:
