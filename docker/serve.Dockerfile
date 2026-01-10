@@ -13,16 +13,9 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-#COPY app ./app
-#COPY inference ./inference
-#COPY config.py .
-COPY app /app/app
-COPY config.py /app/config.py
-COPY inference /app/inference
-
-# Copy ML artifacts into the Docker image
-COPY data/feature_engineering /app/data/feature_engineering
-COPY models/xgboost /app/models/xgboost
+COPY app ./app
+COPY inference ./inference
+COPY config.py .
 
 EXPOSE 8000
 
