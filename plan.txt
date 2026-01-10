@@ -12,3 +12,9 @@ model experimentation and training
 evaluation
 
 inference: use all the preprocessors and saved model
+
+CI :
+    - unit test 
+    - build docker images
+    - login to DockerHub
+    - push images to repositories
