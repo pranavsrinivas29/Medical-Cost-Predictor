@@ -28,7 +28,7 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl config use-context my-context  # Optional
+          # kubectl config use-context my-context  # Optional
           kubectl apply -f k8s/namespace.yaml
           kubectl apply -f k8s/volumes.yaml
           kubectl apply -f k8s/fastapi-deployment.yaml
