@@ -1,33 +1,41 @@
-name: CD
+name: CD - Deploy to Kubernetes
 
 on:
   push:
     branches:
-      - master
+      - master  # or your deployment branch
+    paths:
+      - 'k8s/**'
+      - '.github/workflows/cd.yml'
 
 jobs:
   deploy:
-    name: Deploy to Kubernetes
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install kubectl
+      - name: Set up kubectl
         uses: azure/setup-kubectl@v3
         with:
-          version: "v1.30.5"
+          version: 'v1.34.1'  # Match your cluster version
 
-      - name: Configure kubeconfig
+      - name: Set up Kubeconfig
         run: |
           mkdir -p ~/.kube
-          echo "${{ secrets.KUBE_CONFIG }}" | base64 --decode > ~/.kube/config
+          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > ~/.kube/config
 
-      - name: Restart FastAPI Deployment
+      - name: Deploy to Kubernetes
         run: |
-          kubectl rollout restart deployment fastapi-deployment -n mlops-system
+          kubectl config use-context my-context  # Optional
+          kubectl apply -f k8s/namespace.yaml
+          kubectl apply -f k8s/volumes.yaml
+          kubectl apply -f k8s/fastapi-deployment.yaml
+          kubectl apply -f k8s/fastapi-service.yaml
+          kubectl apply -f k8s/streamlit-deployment.yaml
+          kubectl apply -f k8s/streamlit-service.yaml
 
-      - name: Restart Streamlit Deployment
+      - name: Verify Pods
         run: |
-          kubectl rollout restart deployment streamlit-deployment -n mlops-system
+          kubectl get pods -n mlops-system
