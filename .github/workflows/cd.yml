@@ -31,9 +31,11 @@ jobs:
           doctl auth init --access-token $DIGITALOCEAN_ACCESS_TOKEN
           doctl kubernetes cluster kubeconfig save bc18a38d-71cc-4035-b49d-93f038407a45
 
-      - name: Delete existing PVC (optional, only if safe)
+      - name: Cleanup all previous resources (force delete)
         run: |
-          kubectl delete pvc mlops-pvc -n mlops-system --ignore-not-found
+          kubectl delete all --all -n mlops-system --ignore-not-found
+          kubectl delete pvc --all -n mlops-system --ignore-not-found
+          kubectl delete pv mlops-pv --ignore-not-found || true
 
       - name: Apply Kubernetes manifests
         run: |
