@@ -20,7 +20,8 @@ jobs:
 
       - name: Install doctl
         run: |
-          sudo snap install doctl
+          curl -sL https://github.com/digitalocean/doctl/releases/latest/download/doctl-$(uname -s)-$(uname -m).tar.gz | tar -xzv
+          sudo mv doctl /usr/local/bin
 
       - name: Authenticate with DigitalOcean
         env:
