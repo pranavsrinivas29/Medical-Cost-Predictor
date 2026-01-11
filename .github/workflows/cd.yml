@@ -1,41 +1,36 @@
-name: CD - Deploy to Kubernetes
-
-on:
-  push:
-    branches:
-      - master  # or your deployment branch
-    paths:
-      - 'k8s/**'
-      - '.github/workflows/cd.yml'
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up kubectl
         uses: azure/setup-kubectl@v3
         with:
-          version: 'v1.34.1'  # Match your cluster version
+          version: 'latest'
 
-      - name: Set up Kubeconfig
+      - name: Install doctl
         run: |
-          mkdir -p ~/.kube
-          echo "${{ secrets.KUBECONFIG_DATA }}" | base64 --decode > ~/.kube/config
+          sudo snap install doctl
 
-      - name: Deploy to Kubernetes
+      - name: Authenticate with DigitalOcean
+        env:
+          DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
         run: |
-          # kubectl config use-context my-context  # Optional
+          doctl auth init --access-token $DIGITALOCEAN_ACCESS_TOKEN
+          doctl kubernetes cluster kubeconfig save bc18a38d-71cc-4035-b49d-93f038407a45
+
+      - name: Apply Kubernetes manifests
+        run: |
           kubectl apply -f k8s/namespace.yaml
           kubectl apply -f k8s/volumes.yaml
           kubectl apply -f k8s/fastapi-deployment.yaml
           kubectl apply -f k8s/fastapi-service.yaml
           kubectl apply -f k8s/streamlit-deployment.yaml
           kubectl apply -f k8s/streamlit-service.yaml
-
-      - name: Verify Pods
+      - name: Wait for rollout to complete
         run: |
-          kubectl get pods -n mlops-system
+          kubectl rollout status deployment/fastapi-deployment -n mlops-system
+          kubectl rollout status deployment/streamlit-deployment -n mlops-system
