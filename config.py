@@ -15,7 +15,7 @@ else:
     DATA_DIR = PROJECT_ROOT / "data"
 
 FE_DIR = DATA_DIR / "feature_engineering"
-MODELS_DIR = DATA_DIR / "models"
+MODELS_DIR = PROJECT_ROOT / "models"
 OUTPUTS_DIR = PROJECT_ROOT / "outputs"
 
 # Feature engineering artifacts
