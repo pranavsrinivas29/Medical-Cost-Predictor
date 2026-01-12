@@ -23,9 +23,16 @@ RUN pip install --no-cache-dir -r requirements.txt \
 # Copy project files (including .dvc, .dvc/config, dvc.lock, etc.)
 COPY . .
 
-# Disable SCM requirement and pull data from DVC remote
-RUN dvc config core.no_scm true \
-    && dvc pull
+# Add these lines before `dvc pull`
+ARG DVC_USER
+ARG DVC_PASSWORD
+
+# Setup DVC auth and pull data
+RUN dvc config core.no_scm true && \
+    dvc remote modify origin auth basic && \
+    dvc remote modify origin user $DVC_USER && \
+    dvc remote modify origin password $DVC_PASSWORD && \
+    dvc pull
 
 EXPOSE 8000
 
