@@ -43,7 +43,11 @@ jobs:
 
       - name: Build & Push FastAPI image
         run: |
-          docker build -f docker/serve.Dockerfile -t ${{ secrets.DOCKERHUB_USERNAME }}/insurance-fastapi:latest .
+          docker build \
+            --build-arg DVC_USER=${{ secrets.DVC_USER }} \
+            --build-arg DVC_PASSWORD=${{ secrets.DVC_PASSWORD }} \
+            -f docker/serve.Dockerfile \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/insurance-fastapi:latest .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/insurance-fastapi:latest
 
       - name: Build & Push Streamlit image
