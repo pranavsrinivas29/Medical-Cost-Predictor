@@ -1,4 +1,8 @@
 [core]
-    remote = localremote
+    remote = origin
 ['remote "localremote"']
     url = ../../mlops-e2e-dvc-remote
+['remote "origin"']
+    url = https://dagshub.com/pranav10srinivas/Medical-Cost-Predictor.dvc
+    user = pranav10srinivas
+    password = c30735c1ec82442f52dc052543f6ddc17d0395da
