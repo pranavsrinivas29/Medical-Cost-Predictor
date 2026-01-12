@@ -18,3 +18,8 @@ CI :
     - build docker images
     - login to DockerHub
     - push images to repositories
+
+
+keep same url for hosted ones
+add kubeflow
+add monitoring (Prometheus or Grafana)
