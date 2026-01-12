@@ -16,13 +16,14 @@ spec:
       containers:
         - name: fastapi
           image: pranavsrinivas2999/insurance-fastapi:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
-          volumeMounts:
-            - name: mlops-volume
-              mountPath: /data
+          #volumeMounts:
+          #  - name: mlops-volume
+          #    mountPath: /data
 
-      volumes:
-        - name: mlops-volume
-          persistentVolumeClaim:
-            claimName: mlops-pvc
+      #volumes:
+      #  - name: mlops-volume
+      #    persistentVolumeClaim:
+      #      claimName: mlops-pvc
