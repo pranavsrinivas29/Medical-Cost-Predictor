@@ -19,6 +19,17 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
+          env:
+            - name: DAGSHUB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: dagshub-secret
+                  key: username
+            - name: DAGSHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: dagshub-secret
+                  key: token
           #volumeMounts:
           #  - name: mlops-volume
           #    mountPath: /data
